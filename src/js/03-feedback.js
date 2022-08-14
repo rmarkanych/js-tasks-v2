@@ -15,7 +15,6 @@ function addToLocalStorage() {
     email: emailInput.value,
     message: messageInput.value,
   };
-
   localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(dataObject));
 }
 
@@ -31,7 +30,9 @@ function newFun() {
 
 function showLocalStorageData(e) {
   e.preventDefault();
-  console.log(dataObject);
-  feedbackForm.reset();
-  localStorage.removeItem(LOCALSTORAGE_KEY);
+  if (emailInput.value.trim() !== '' && messageInput.value.trim() !== '') {
+    console.log(dataObject);
+    feedbackForm.reset();
+    localStorage.removeItem(LOCALSTORAGE_KEY);
+  }
 }
