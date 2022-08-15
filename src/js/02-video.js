@@ -13,5 +13,9 @@ player.on(
 
 player
   .setCurrentTime(localStorage.getItem(MESSAGE))
-  .then(function () {})
-  .catch(function () {});
+  .then(function () {
+    localStorage.removeItem(MESSAGE);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });

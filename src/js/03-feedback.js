@@ -19,8 +19,8 @@ function addToLocalStorage() {
 }
 
 function newFun() {
-  let savedData = localStorage.getItem(LOCALSTORAGE_KEY);
-  let newData = JSON.parse(savedData);
+  const savedData = localStorage.getItem(LOCALSTORAGE_KEY);
+  const newData = JSON.parse(savedData);
 
   if (newData) {
     emailInput.value = newData.email;
