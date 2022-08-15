@@ -9,7 +9,7 @@ feedbackForm.addEventListener('input', throttle(addToLocalStorage, 500));
 feedbackForm.addEventListener('submit', showLocalStorageData);
 
 let dataObject = {};
-newFun();
+fillInputsFromLocalStorage();
 function addToLocalStorage() {
   dataObject = {
     email: emailInput.value,
@@ -18,19 +18,18 @@ function addToLocalStorage() {
   localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(dataObject));
 }
 
-function newFun() {
-  const savedData = localStorage.getItem(LOCALSTORAGE_KEY);
-  const newData = JSON.parse(savedData);
-
-  if (newData) {
-    emailInput.value = newData.email;
-    messageInput.value = newData.message;
+function fillInputsFromLocalStorage() {
+  const savedData = JSON.parse(localStorage.getItem(LOCALSTORAGE_KEY));
+  if (savedData) {
+    emailInput.value = savedData.email;
+    messageInput.value = savedData.message;
   }
+  dataObject = savedData;
 }
 
 function showLocalStorageData(e) {
   e.preventDefault();
-  if (emailInput.value.trim() !== '' && messageInput.value.trim() !== '') {
+  if (emailInput.value.trim() && messageInput.value.trim()) {
     console.log(dataObject);
     feedbackForm.reset();
     localStorage.removeItem(LOCALSTORAGE_KEY);

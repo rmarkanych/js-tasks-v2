@@ -10,12 +10,10 @@ player.on(
   'timeupdate',
   throttle(data => localStorage.setItem(MESSAGE, data.seconds), 1000)
 );
-
-player
-  .setCurrentTime(localStorage.getItem(MESSAGE))
-  .then(function () {
-    localStorage.removeItem(MESSAGE);
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
+player.setCurrentTime(localStorage.getItem(MESSAGE)).catch(function (error) {
+  switch (error.name) {
+    case 'RangeError':
+      console.log('error');
+      break;
+  }
+});
